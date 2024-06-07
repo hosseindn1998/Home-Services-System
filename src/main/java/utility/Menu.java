@@ -3,10 +3,7 @@ package utility;
 import base.exception.BadInputException;
 import base.exception.DuplicateValueException;
 import base.exception.NotFoundException;
-import model.Admin;
-import model.Technician;
-import model.TechnicianStatus;
-import model.Wallet;
+import model.*;
 import service.Admin.AdminServiceImpl;
 import service.Customer.CustomerServiceImpl;
 import service.Order.OrderServiceImpl;
@@ -293,6 +290,24 @@ public class Menu {
         } catch (BadInputException | DuplicateValueException e) {
             System.out.println(e.getMessage());
         } catch (IllegalStateException ignored) {
+        }
+    }
+    public void signUpCustomer() {
+        try {
+            Wallet wallet = walletService.saveOrUpdate(new Wallet(0L));
+            Customer customer = Customer.builder()
+                    .firstName(getFirstName())
+                    .lastName(getLastName())
+                    .email(getEmail())
+                    .password(getPassword())
+                    .registeredDate(LocalDate.now())
+                    .wallet(wallet)
+                    .build();
+            customerService.saveOrUpdate(customer);
+        } catch (DuplicateValueException | BadInputException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalStateException ignored) {
+
         }
     }
 
