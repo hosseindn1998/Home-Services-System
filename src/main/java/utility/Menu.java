@@ -521,6 +521,23 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void loginAsTechnician() {
+        System.out.println("Please Enter Your Email:");
+        String email = getString();
+        System.out.println("Please Enter Your Password");
+        String password = getString();
+        try {
+            Technician technician = technicianService.authentication(email, password);
+            if (technician == null)
+                throw new NotFoundException("Error : email or password is false");
+            loggedInUser = technician.getId();
+            technicianMenu();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
 
 
 }
