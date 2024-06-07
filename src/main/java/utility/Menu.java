@@ -1,5 +1,7 @@
 package utility;
 
+import base.exception.NotFoundException;
+import model.Admin;
 import service.Admin.AdminServiceImpl;
 import service.Customer.CustomerServiceImpl;
 import service.Order.OrderServiceImpl;
@@ -191,6 +193,21 @@ public class Menu {
     public void logout() {
         loggedInUser = null;
         System.out.println("You Are Logged Out Successfully");
+    }
+    public void loginAsAdmin() {
+        System.out.println("Please Enter Your Email:");
+        String email = getString();
+        System.out.println("Please Enter Your Password");
+        String password = getString();
+        try {
+            Admin admin = adminService.authentication(email, password);
+            if (admin == null)
+                throw new NotFoundException("Error : email or password is false");
+            loggedInUser = admin.getId();
+            adminMenu();
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
