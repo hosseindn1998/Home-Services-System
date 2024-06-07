@@ -564,6 +564,10 @@ public class Menu {
         subServiceService.delete(subServiceService.findById(subServiceId));
         System.out.println("SubService Deleted Successfully.");
     }
+    public void seeTechnicians() {
+        System.out.println("ID - FirstName - LastName ");
+        technicianService.findAll().forEach(s -> System.out.println(s.getId() + s.getFirstName() + s.getLastName()));
+    }
 
 
 
