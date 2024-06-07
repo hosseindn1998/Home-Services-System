@@ -98,5 +98,49 @@ public class Menu {
 
         } while (!exit);
     }
+    public void adminMenu() {
+        boolean exit = false;
+        do {
+            System.out.println("  *** Admin Menu ***  ");
+            System.out.println("1-Add Service");
+            System.out.println("2-See Service");
+            System.out.println("3-Delete Service");
+            System.out.println("4-Add SubService");
+            System.out.println("5-See SubService");
+            System.out.println("6-Update SubService");
+            System.out.println("7-Delete SubService");
+            System.out.println("8-Download Picture Of Technician");
+            System.out.println("9-Verify Technician");
+            System.out.println("10-Add Technician To SubService");
+            System.out.println("11-Delete Technician From SubService");
+            System.out.println("12-Delete Technician by ID");
+            System.out.println("13-Delete Customer by ID");
+            System.out.println("0-Logout");
+
+            int number = getIntFromUser();
+
+
+            switch (number) {
+                case 1 -> addService();
+                case 2 -> seeServices();
+                case 3 -> deleteService();
+                case 4 -> addSubService();
+                case 5 -> seeSubServices();
+                case 6 -> updateSubService();
+                case 7 -> deleteSubService();
+                case 8 -> fetchAvatarFile();
+                case 9 -> verifyTechnician();
+                case 10 -> addTechnicianToSubService();
+                case 11 -> deleteTechnicianFromSubService();
+                case 12 -> deleteTechnician();
+                case 13 -> deleteCustomer();
+                case 0 -> {
+                    exit = true;
+                    logout();
+                }
+                default -> System.out.println("Integer must be between 0-13");
+            }
+        } while (!exit);
+    }
 
 }
