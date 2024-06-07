@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import java.io.Serializable;
+import java.util.List;
 
 @RequiredArgsConstructor
 public class BaseServiceImpl<T extends BaseEntity<ID>,
@@ -48,6 +49,19 @@ public class BaseServiceImpl<T extends BaseEntity<ID>,
             throw new NotFoundException(String.format("entity with %s not found", id));
         }
     }
+    @Override
+    public void delete(T t) {
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
+            repository.delete(t);
+            transaction.commit();
+        } catch (Exception e) {
+            assert transaction != null;
+            transaction.rollback();
+        }
+    }
+
 
 
 }
