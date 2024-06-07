@@ -1,7 +1,9 @@
 package utility;
 
+import base.exception.BadInputException;
 import base.exception.NotFoundException;
 import model.Admin;
+import model.Technician;
 import service.Admin.AdminServiceImpl;
 import service.Customer.CustomerServiceImpl;
 import service.Order.OrderServiceImpl;
@@ -11,6 +13,9 @@ import service.Technician.TechnicianServiceImpl;
 import service.Wallet.WalletServiceImpl;
 import service.technician_subservice.TechnicianSubServiceServiceImpl;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -206,6 +211,17 @@ public class Menu {
             loggedInUser = admin.getId();
             adminMenu();
         } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void setAvatarFile(Technician technician, String fileAddressAndName) {
+        try {
+            Path path = Paths.get(fileAddressAndName);
+            if (Files.size(path) > (300 * 1024))
+                throw new BadInputException("File must be les than 300 Kb");
+            technician.setAvatar(Files.readAllBytes(path));
+            technicianService.saveOrUpdate(technician);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
