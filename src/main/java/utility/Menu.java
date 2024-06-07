@@ -256,5 +256,16 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void deleteCustomer() {
+        try {
+            seeCustomers();
+            System.out.println("Please Inter CustomerId You Want To Delete :");
+            Long technicianId = getLongFromUser();
+            customerService.delete(customerService.findById(technicianId));
+            System.out.println("Customer Deleted Successfully");
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
