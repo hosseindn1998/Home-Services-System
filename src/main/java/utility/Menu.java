@@ -552,6 +552,11 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void seeOrderByCustomer() {
+        System.out.println(" ID -SubService Name-Description-suggestedPrice-DateForDo-OrderStatus-Paid? ");
+        orderService.findByCustomerId(loggedInUser).forEach(s -> System.out.println(s.getId() + "-" + s.getSubservice().getName() +
+                " " + s.getDescription() + " " + s.getSuggestedPrice() + " " + s.getDateForDo() + " " + s.getOrderStatus() + " " + s.getIsPaid()));
+    }
 
 
 
