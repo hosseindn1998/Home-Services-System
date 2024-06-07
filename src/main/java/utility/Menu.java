@@ -343,6 +343,13 @@ public class Menu {
         Service service = Service.builder().name(name).build();
         serviceService.saveOrUpdate(service);
     }
+    public void deleteService() {
+        seeServices();
+        System.out.println("Please enter service id:");
+        Long serviceId = getIntFromUser().longValue();
+        serviceService.delete(serviceService.findById(serviceId));
+        System.out.println("Service deleted Successfully.");
+    }
 
 
 }
