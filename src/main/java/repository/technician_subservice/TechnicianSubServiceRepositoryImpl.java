@@ -44,6 +44,7 @@ public class TechnicianSubServiceRepositoryImpl extends BaseRepositoryImpl<Techn
         query.setParameter("subServiceId", subServiceId);
         return query.getSingleResultOrNull() != null;
     }
+
     @Override
     public List<TechnicianSubService> findByTechnicianId(Long technicianId) {
         Session session = SessionFactorySingleton.getInstance().getCurrentSession();
