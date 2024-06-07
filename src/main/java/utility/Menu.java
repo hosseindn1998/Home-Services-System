@@ -336,7 +336,13 @@ public class Menu {
         System.out.println("Service Id - ServiceName :");
         serviceService.findAll().forEach(s -> System.out.println(s.getId() + " - " + s.getName()));
     }
-
+    public void addService() {
+        System.out.println("Enter Service Name :");
+        String name = scanner.next();
+        scanner.nextLine();
+        Service service = Service.builder().name(name).build();
+        serviceService.saveOrUpdate(service);
+    }
 
 
 }
