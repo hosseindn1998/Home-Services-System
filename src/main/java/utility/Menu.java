@@ -321,6 +321,17 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void changeTechnicianPassword() {
+        System.out.println("Please enter new password :");
+        String newPassword = getString();
+        try {
+            Technician technician = technicianService.findById(loggedInUser);
+            technician.setPassword(newPassword);
+            technicianService.saveOrUpdate(technician);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 
