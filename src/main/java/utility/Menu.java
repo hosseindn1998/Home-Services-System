@@ -20,7 +20,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -355,6 +357,33 @@ public class Menu {
         subServiceService.findAll().forEach(s -> System.out.println(s.getId() + "-" + s.getService().getName() + "-"
                 + s.getName() + "-" + s.getBasePrice() + "-" + s.getDescription()));
 
+    }
+    public void addSubService() {
+        System.out.println("Please enter SubService name :");
+        String name = getString();
+        System.out.println("Please enter base price for SubService :");
+        Long basePrice = getLongFromUser();
+        System.out.println("Please enter description :");
+        String description = getString();
+        seeServices();
+        try {
+            System.out.println("Service Id :");
+            Long serviceId = getLongFromUser();
+            Service service = serviceService.findById(serviceId);
+            List<String> list = subServiceService.findAll().stream().map(SubService::getName).toList();
+            if (list.contains(name))
+                throw new DuplicateValueException("A SubService by this Name is Already exists");
+            SubService subService = SubService.builder()
+                    .name(name)
+                    .basePrice(basePrice)
+                    .description(description)
+                    .service(service)
+                    .orders(new ArrayList<>())
+                    .build();
+            subServiceService.saveOrUpdate(subService);
+        } catch (DuplicateValueException | NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
