@@ -200,6 +200,24 @@ public class Menu {
             }
         } while (!exit);
     }
+    public void seeTechnicianSubServices(Long technicianId) {
+        try {
+            Technician technician = technicianService.findById(technicianId);
+            List<TechnicianSubService> technicianSubServices = technician.getTechnicianSubServices();
+            List<SubService> list = technicianSubServices
+                    .stream()
+                    .map(TechnicianSubService::getSubService)
+                    .toList();
+            if (list.isEmpty())
+                throw new NotFoundException(String.format("No subService for technician id=%s Found", technicianId));
+
+            System.out.println("ID - Name - Description - ServiceName");
+            list.forEach(subService -> System.out.println(subService.getId() + "-" + subService.getName() + " " + subService.getDescription()
+                    + " " + subService.getService().getName()));
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void logout() {
         loggedInUser = null;
         System.out.println("You Are Logged Out Successfully");
