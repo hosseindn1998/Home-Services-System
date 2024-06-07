@@ -568,6 +568,10 @@ public class Menu {
         System.out.println("ID - FirstName - LastName ");
         technicianService.findAll().forEach(s -> System.out.println(s.getId() + s.getFirstName() + s.getLastName()));
     }
+    public void seeCustomers() {
+        System.out.println("ID - FirstName - LastName ");
+        customerService.findAll().forEach(s -> System.out.println(s.getId() + s.getFirstName() + s.getLastName()));
+    }
 
 
 
