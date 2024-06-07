@@ -310,6 +310,17 @@ public class Menu {
 
         }
     }
+    public void changeCustomerPassword() {
+        System.out.println("Please enter new password :");
+        String newPassword = getString();
+        try {
+            Customer customer = customerService.findById(loggedInUser);
+            customer.setPassword(newPassword);
+            customerService.saveOrUpdate(customer);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 
