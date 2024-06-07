@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -484,6 +485,39 @@ public class Menu {
             technicianService.saveOrUpdate(technician);
 
         } catch (NotFoundException | DuplicateValueException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void addOrder() {
+        seeServices();
+        System.out.println("Choose a service for Create a order :");
+        Long serviceId = getLongFromUser();
+        subServiceService.findSubServicesByServiceId(serviceId).forEach(s -> System.out.println(s.getId() + "-" + s.getName() + "  " + s.getDescription() + "  " + s.getBasePrice()));
+        System.out.println("Choose a SubService for Create a order :");
+        Long subServiceId = getLongFromUser();
+        SubService subService = subServiceService.findSubServiceByServiceIdAndSubServiceId(serviceId, subServiceId);
+        System.out.printf("Enter Your Order Price(Must be equal or more than base price =(%s)%n", subService.getBasePrice());
+        Long suggestedPrice = getLongFromUser();
+        System.out.println("Enter some word to describe Your expectations from the Technician");
+        String description = getString();
+        System.out.println("Enter Full Address (show only for chosen technician)");
+        String address = getString();
+        try {
+            System.out.println("Enter Date for technician start first Year Second Month Third Day of Month");
+            LocalDate date = getDateFromUser();
+            Order order = Order.builder()
+                    .suggestedPrice(suggestedPrice >= subService.getBasePrice() ? suggestedPrice : subService.getBasePrice())
+                    .description(description)
+                    .dateForDo(date.isAfter(LocalDate.now()) ? date : null)
+                    .offers(new ArrayList<>())
+                    .orderStatus(OrderStatus.WAIT_FOR_TECHNICIAN_OFFER)
+                    .isPaid(Boolean.FALSE)
+                    .address(address)
+                    .customer(customerService.findById(loggedInUser))
+                    .subservice(subService)
+                    .build();
+            orderService.saveOrUpdate(order);
+        } catch (DateTimeParseException e) {
             System.out.println(e.getMessage());
         }
     }
