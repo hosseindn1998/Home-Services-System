@@ -22,7 +22,14 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl<Order, Long> impleme
         query.setParameter("customerId", customerId);
         return query.getResultList();
     }
-
+    @Override
+    public Optional<Order> findByCustomerIdAndId(Long customerId, Long id) {
+        Session session = SessionFactorySingleton.getInstance().getCurrentSession();
+        Query<Order> query = session.createQuery("from model.Order o where o.customer.id = : customerId and o.id = :id", getEntityClass());
+        query.setParameter("customerId", customerId);
+        query.setParameter("id", id);
+        return Optional.ofNullable(query.getSingleResult());
+    }
 
 
     @Override
