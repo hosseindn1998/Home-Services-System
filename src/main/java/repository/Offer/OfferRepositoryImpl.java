@@ -31,6 +31,15 @@ public class OfferRepositoryImpl extends BaseRepositoryImpl<Offer, Long> impleme
         return query.getResultList();
     }
 
+    @Override
+    public Optional<Offer> findByOrderIdAndId(Long orderId, Long id) {
+        Session session = SessionFactorySingleton.getInstance().getCurrentSession();
+        Query<Offer> query = session.createQuery("from model.Offer o where o.odrer.id = : orderId and o.id = :id", getEntityClass());
+        query.setParameter("orderId", orderId);
+        query.setParameter("id", id);
+        return Optional.ofNullable(query.getSingleResult());
+    }
+
 
 
     @Override
