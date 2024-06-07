@@ -167,5 +167,26 @@ public class Menu {
 
         } while (!exit);
     }
+    public void technicianMenu() {
+        boolean exit = false;
+        do {
+            System.out.println("  *** Technician Menu ***  ");
+            System.out.println("1-Change Password");
+            System.out.println("0-Logout");
+
+
+            int number = getIntFromUser();
+
+
+            switch (number) {
+                case 1 -> changeTechnicianPassword();
+                case 0 -> {
+                    exit = true;
+                    logout();
+                }
+                default -> System.out.println("Integer must be between 0-3");
+            }
+        } while (!exit);
+    }
 
 }
