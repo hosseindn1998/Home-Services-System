@@ -405,7 +405,7 @@ public class Menu {
                     .build();
             subServiceService.saveOrUpdate(subService);
             System.out.println("Add SubService successfully");
-        } catch (DuplicateValueException | NotFoundException e) {
+        } catch (DuplicateValueException | NotFoundException | IllegalStateException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -449,7 +449,7 @@ public class Menu {
             }
             subServiceService.saveOrUpdate(subService);
             System.out.println("SubService Updated Successfully.");
-        } catch (NotFoundException e) {
+        } catch (NotFoundException | IllegalStateException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -542,7 +542,7 @@ public class Menu {
                     .build();
             orderService.saveOrUpdate(order);
             System.out.println("order added successfully");
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException | IllegalStateException e) {
             System.out.println(e.getMessage());
         }
     }
