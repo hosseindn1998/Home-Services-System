@@ -350,6 +350,12 @@ public class Menu {
         serviceService.delete(serviceService.findById(serviceId));
         System.out.println("Service deleted Successfully.");
     }
+    public void seeSubServices() {
+        System.out.println("SubServiceId - ServiceName - name - BasePrice - Description");
+        subServiceService.findAll().forEach(s -> System.out.println(s.getId() + "-" + s.getService().getName() + "-"
+                + s.getName() + "-" + s.getBasePrice() + "-" + s.getDescription()));
+
+    }
 
 
 }
