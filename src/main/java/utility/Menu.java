@@ -537,6 +537,21 @@ public class Menu {
         }
 
     }
+    public void loginAsCustomer() {
+        System.out.println("Please Enter Your Email:");
+        String email = getString();
+        System.out.println("Please Enter Your Password");
+        String password = getString();
+        try {
+            Customer customer = customerService.authentication(email, password);
+            if (customer == null)
+                throw new NotFoundException("Error : email or password is false");
+            loggedInUser = customer.getId();
+            customerMenu();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 
