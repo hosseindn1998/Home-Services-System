@@ -9,6 +9,8 @@ import service.Technician.TechnicianServiceImpl;
 import service.Wallet.WalletServiceImpl;
 import service.technician_subservice.TechnicianSubServiceServiceImpl;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -40,4 +42,18 @@ public class Menu {
     public Long getLongFromUser() {
         return (long) getIntFromUser();
     }
+    public String getString() {
+        String string = scanner.next();
+        scanner.nextLine();
+        return string;
+    }
+    public LocalDate getDateFromUser() {
+        String input = getString();
+        try (Scanner scanner = new Scanner(input)) {
+            String dateString = scanner.next();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            return LocalDate.parse(dateString, formatter);
+        }
+    }
+
 }
