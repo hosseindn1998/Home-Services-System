@@ -142,5 +142,30 @@ public class Menu {
             }
         } while (!exit);
     }
+    public void customerMenu() {
+        boolean exit = false;
+        do {
+            System.out.println("  *** Customer Menu ***  ");
+            System.out.println("1-Change Password");
+            System.out.println("2-Add Order");
+            System.out.println("3-See Orders");
+            System.out.println("0-Logout");
+
+            int number = getIntFromUser();
+
+
+            switch (number) {
+                case 1 -> changeCustomerPassword();
+                case 2 -> addOrder();
+                case 3 -> seeOrderByCustomer();
+                case 0 -> {
+                    exit = true;
+                    logout();
+                }
+                default -> System.out.println("Integer must be between 0-3");
+            }
+
+        } while (!exit);
+    }
 
 }
