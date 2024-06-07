@@ -40,7 +40,14 @@ public class OfferRepositoryImpl extends BaseRepositoryImpl<Offer, Long> impleme
         return Optional.ofNullable(query.getSingleResult());
     }
 
-
+    @Override
+    public Boolean isExistsByTechnicianAndOrder(Long technicianId, Long orderId) {
+        Session session = SessionFactorySingleton.getInstance().getCurrentSession();
+        Query<Offer> query = session.createQuery("FROM model.Offer o WHERE o.technician.id = :technicianId And o.order.id = :orderId ", getEntityClass());
+        query.setParameter("technicianId", technicianId);
+        query.setParameter("orderId", orderId);
+        return !query.getResultList().isEmpty();
+    }
 
     @Override
     public Class<Offer> getEntityClass() {
