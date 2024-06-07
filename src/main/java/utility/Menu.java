@@ -37,4 +37,7 @@ public class Menu {
         scanner.nextLine();
         return input;
     }
+    public Long getLongFromUser() {
+        return (long) getIntFromUser();
+    }
 }
