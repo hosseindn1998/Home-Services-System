@@ -385,6 +385,50 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void updateSubService() {
+        seeSubServices();
+        try {
+            System.out.println("SubService Id :");
+            Long subServiceId = getIntFromUser().longValue();
+            SubService subService = subServiceService.findById(subServiceId);
+            if (subService == null)
+                throw new NotFoundException("SubService Not Found");
+            System.out.println("1-update Name");
+            System.out.println("2-update Description");
+            System.out.println("3-update Service");
+            System.out.println("4-update Base Price");
+
+            int number = getIntFromUser();
+
+            switch (number) {
+                case 1 -> {
+                    System.out.println("Please Enter New Name :");
+                    String name = getString();
+                    subService.setName(name);
+
+                }
+                case 2 -> {
+                    System.out.println("Please Enter New Description :");
+                    String description = getString();
+                    subService.setDescription(description);
+                }
+                case 3 -> {
+                    seeServices();
+                    System.out.println("Please Enter New Service id :");
+                    subService.setService(serviceService.findById(getLongFromUser()));
+                }
+                case 4 -> {
+                    System.out.println("Please enter new base price");
+                    subService.setBasePrice(getLongFromUser());
+                }
+                default -> System.out.println("Please Enter Number Between (1-3)");
+            }
+            subServiceService.saveOrUpdate(subService);
+            System.out.println("SubService Updated Successfully.");
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 }
