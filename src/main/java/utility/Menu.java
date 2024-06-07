@@ -55,5 +55,22 @@ public class Menu {
             return LocalDate.parse(dateString, formatter);
         }
     }
+    public String getFirstName(){
+        System.out.println("Please Enter First Name : ");
+        return getString();
+    }
+    public String getLastName(){
+        System.out.println("Please Enter Last Name :");
+        return getString();
+    }
+    public String getEmail(){
+        System.out.println("Please Enter Email Name :");
+        return getString().toLowerCase().trim();
+    }
+
+    public String getPassword(){
+        System.out.println("Please Enter Choosing Password :");
+        return getString();
+    }
 
 }
