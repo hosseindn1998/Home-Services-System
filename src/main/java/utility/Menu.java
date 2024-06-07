@@ -13,6 +13,8 @@ import service.Technician.TechnicianServiceImpl;
 import service.Wallet.WalletServiceImpl;
 import service.technician_subservice.TechnicianSubServiceServiceImpl;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -222,6 +224,24 @@ public class Menu {
             technician.setAvatar(Files.readAllBytes(path));
             technicianService.saveOrUpdate(technician);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void fetchAvatarFile() {
+        System.out.println("Please enter technician id :");
+        Technician technician = technicianService.findById(getLongFromUser());
+        String fileAddress;
+        do {
+            System.out.println("Please Enter Valid Path file" +
+                    "for Example E:\\code.jpg");
+            fileAddress = scanner.next();
+            scanner.nextLine();
+        } while (!Validation.isValidPathFile(fileAddress));
+
+        byte[] avatar = technician.getAvatar();
+        try (FileOutputStream fos = new FileOutputStream(fileAddress)) {
+            fos.write(avatar);
+        } catch (IOException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
     }
