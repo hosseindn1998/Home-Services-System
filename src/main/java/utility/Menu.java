@@ -1,9 +1,12 @@
 package utility;
 
 import base.exception.BadInputException;
+import base.exception.DuplicateValueException;
 import base.exception.NotFoundException;
 import model.Admin;
 import model.Technician;
+import model.TechnicianStatus;
+import model.Wallet;
 import service.Admin.AdminServiceImpl;
 import service.Customer.CustomerServiceImpl;
 import service.Order.OrderServiceImpl;
@@ -267,5 +270,32 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void signUpTechnician() {
+        try {
+
+            Wallet wallet = walletService.saveOrUpdate(new Wallet(0L));
+            Technician technician = Technician.builder()
+                    .firstName(getFirstName())
+                    .lastName(getLastName())
+                    .email(getEmail())
+                    .password(getPassword())
+                    .technicianStatus(TechnicianStatus.NEW_TECHNICIAN)
+                    .registeredDate(LocalDate.now())
+                    .rate(0.0d)
+                    .wallet(wallet)
+                    .build();
+            System.out.println("Please Enter Picture For Avatar File Address (for example E:\\code.jpg ):");
+            String fileAddress = getString();
+            if (!Validation.isValidPathFile(fileAddress))
+                throw new BadInputException("Path file is Not valid,try again");
+            setAvatarFile(technician, fileAddress);
+            technicianService.saveOrUpdate(technician);
+        } catch (BadInputException | DuplicateValueException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalStateException ignored) {
+        }
+    }
+
+
 
 }
