@@ -61,7 +61,19 @@ public class BaseServiceImpl<T extends BaseEntity<ID>,
             transaction.rollback();
         }
     }
-
+    @Override
+    public List<T> findAll() {
+        try (Session session = sessionFactory.getCurrentSession()){
+            session.beginTransaction();
+            List<T> listAll = repository.findAll();
+            session.getTransaction().commit();
+            session.close();
+            return listAll;
+        }
+        catch (Exception ignored){
+            return null;
+        }
+    }
 
 
 }
