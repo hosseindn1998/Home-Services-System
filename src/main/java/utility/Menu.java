@@ -557,6 +557,13 @@ public class Menu {
         orderService.findByCustomerId(loggedInUser).forEach(s -> System.out.println(s.getId() + "-" + s.getSubservice().getName() +
                 " " + s.getDescription() + " " + s.getSuggestedPrice() + " " + s.getDateForDo() + " " + s.getOrderStatus() + " " + s.getIsPaid()));
     }
+    public void deleteSubService() {
+        seeSubServices();
+        System.out.println("Please enter SubService Id :");
+        Long subServiceId = getLongFromUser();
+        subServiceService.delete(subServiceService.findById(subServiceId));
+        System.out.println("SubService Deleted Successfully.");
+    }
 
 
 
