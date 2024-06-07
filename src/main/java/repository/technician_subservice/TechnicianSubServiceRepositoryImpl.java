@@ -11,6 +11,7 @@ import java.util.List;
 
 public class TechnicianSubServiceRepositoryImpl extends BaseRepositoryImpl<TechnicianSubService, Long> implements TechnicianSubServiceRepository {
     private SessionFactory sessionFactory;
+
     public TechnicianSubServiceRepositoryImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
@@ -29,11 +30,22 @@ public class TechnicianSubServiceRepositoryImpl extends BaseRepositoryImpl<Techn
     @Override
     public TechnicianSubService find(Long technicianId, Long subServiceId) {
         Session session = SessionFactorySingleton.getInstance().getCurrentSession();
-        Query<TechnicianSubService> query = session.createQuery("FROM model.TechnicianSubService t  WHERE t.technician.id= : technicianId AND t.subService.id =: subServiceId" , TechnicianSubService.class);
+        Query<TechnicianSubService> query = session.createQuery("FROM model.TechnicianSubService t  WHERE t.technician.id= : technicianId AND t.subService.id =: subServiceId", TechnicianSubService.class);
         query.setParameter("technicianId", technicianId);
         query.setParameter("subServiceId", subServiceId);
         return query.getSingleResultOrNull();
     }
+
+    @Override
+    public Boolean isExist(Long technicianId, Long subServiceId) {
+        Session session = SessionFactorySingleton.getInstance().getCurrentSession();
+        Query<TechnicianSubService> query = session.createQuery("FROM model.TechnicianSubService t  WHERE t.technician.id= : technicianId AND t.subService.id =: subServiceId", TechnicianSubService.class);
+        query.setParameter("technicianId", technicianId);
+        query.setParameter("subServiceId", subServiceId);
+        return query.getSingleResultOrNull() != null;
+    }
+
+
 
 
 }
