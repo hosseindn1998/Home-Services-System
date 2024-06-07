@@ -332,6 +332,10 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void seeServices() {
+        System.out.println("Service Id - ServiceName :");
+        serviceService.findAll().forEach(s -> System.out.println(s.getId() + " - " + s.getName()));
+    }
 
 
 
