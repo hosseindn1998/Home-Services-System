@@ -188,5 +188,9 @@ public class Menu {
             }
         } while (!exit);
     }
+    public void logout() {
+        loggedInUser = null;
+        System.out.println("You Are Logged Out Successfully");
+    }
 
 }
