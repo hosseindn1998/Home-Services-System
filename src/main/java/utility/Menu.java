@@ -472,6 +472,21 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void verifyTechnician() {
+        seeTechnicians();
+        System.out.println("Please Enter technician id");
+        Long technicianId = getLongFromUser();
+        try {
+            Technician technician = technicianService.findById(technicianId);
+            if (technician.getTechnicianStatus().equals(TechnicianStatus.VERIFIED))
+                throw new DuplicateValueException("This Technician has already been approved");
+            technician.setTechnicianStatus(TechnicianStatus.VERIFIED);
+            technicianService.saveOrUpdate(technician);
+
+        } catch (NotFoundException | DuplicateValueException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 }
