@@ -262,6 +262,7 @@ public class Menu {
         byte[] avatar = technician.getAvatar();
         try (FileOutputStream fos = new FileOutputStream(fileAddress)) {
             fos.write(avatar);
+            System.out.println("avatar fetched successfully");
         } catch (IOException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
@@ -308,6 +309,7 @@ public class Menu {
                 throw new BadInputException("Path file is Not valid,try again");
             setAvatarFile(technician, fileAddress);
             technicianService.saveOrUpdate(technician);
+            System.out.println("Technician Sign up successfully.");
         } catch (BadInputException | DuplicateValueException e) {
             System.out.println(e.getMessage());
         } catch (IllegalStateException ignored) {
@@ -364,6 +366,7 @@ public class Menu {
         scanner.nextLine();
         Service service = Service.builder().name(name).build();
         serviceService.saveOrUpdate(service);
+        System.out.println("add service successfully");
     }
     public void deleteService() {
         seeServices();
@@ -401,6 +404,7 @@ public class Menu {
                     .orders(new ArrayList<>())
                     .build();
             subServiceService.saveOrUpdate(subService);
+            System.out.println("Add SubService successfully");
         } catch (DuplicateValueException | NotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -488,6 +492,7 @@ public class Menu {
             if (technicianSubService == null)
                 throw new NotFoundException("this Relation Not found");
             technicianSubServiceService.delete(technicianSubService);
+            System.out.println("Delete technician from SubService Successfully");
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -502,7 +507,7 @@ public class Menu {
                 throw new DuplicateValueException("This Technician has already been approved");
             technician.setTechnicianStatus(TechnicianStatus.VERIFIED);
             technicianService.saveOrUpdate(technician);
-
+            System.out.println("technician verified successfully");
         } catch (NotFoundException | DuplicateValueException e) {
             System.out.println(e.getMessage());
         }
@@ -536,6 +541,7 @@ public class Menu {
                     .subservice(subService)
                     .build();
             orderService.saveOrUpdate(order);
+            System.out.println("order added successfully");
         } catch (DateTimeParseException e) {
             System.out.println(e.getMessage());
         }
