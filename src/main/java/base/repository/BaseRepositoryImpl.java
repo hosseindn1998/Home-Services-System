@@ -24,6 +24,7 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity<ID>, ID extends Se
             entity = session.merge(entity);
         return entity;
     }
+
     @Override
     public Optional<T> findById(ID id) {
         Session session = sessionFactory.getCurrentSession();
@@ -46,7 +47,6 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity<ID>, ID extends Se
     public abstract Class<T> getEntityClass();
 
     public abstract String getEntity();
-
 
 
 }

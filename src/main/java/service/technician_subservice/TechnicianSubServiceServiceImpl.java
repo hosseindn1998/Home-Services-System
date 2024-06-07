@@ -20,10 +20,10 @@ public class TechnicianSubServiceServiceImpl extends BaseServiceImpl<TechnicianS
     }
 
     @Override
-    public TechnicianSubService find(Long technicianId,Long subServiceId) {
+    public TechnicianSubService find(Long technicianId, Long subServiceId) {
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            TechnicianSubService result = repository.find(technicianId,subServiceId);
+            TechnicianSubService result = repository.find(technicianId, subServiceId);
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class TechnicianSubServiceServiceImpl extends BaseServiceImpl<TechnicianS
     public Boolean isExist(Long technicianId, Long subServiceId) {
         try (Session session = sessionFactory.getCurrentSession()) {
             session.beginTransaction();
-            Boolean result = repository.isExist(technicianId,subServiceId);
+            Boolean result = repository.isExist(technicianId, subServiceId);
             session.getTransaction().commit();
             return result;
         } catch (Exception e) {

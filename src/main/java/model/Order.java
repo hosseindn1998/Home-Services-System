@@ -39,7 +39,7 @@ public class Order extends BaseEntity<Long> {
     String address;
     @Enumerated
     OrderStatus orderStatus;
-    @OneToMany(mappedBy = "odrer",cascade={CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "odrer", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     @ToString.Exclude
     List<Offer> offers;
     @OneToOne

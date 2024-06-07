@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface TechnicianSubServiceService extends BaseService<TechnicianSubService, Long> {
 
-    TechnicianSubService find(Long technicianId,Long subServiceId);
-    Boolean isExist(Long technicianId,Long subServiceId);
+    TechnicianSubService find(Long technicianId, Long subServiceId);
+
+    Boolean isExist(Long technicianId, Long subServiceId);
+
     List<TechnicianSubService> findByTechnicianId(Long technicianId);
 }

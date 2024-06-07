@@ -28,15 +28,16 @@ public class Technician extends Person {
     @Lob
     @ToString.Exclude
     byte[] avatar;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "technician", cascade ={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "technician", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @ToString.Exclude
-    List<TechnicianSubService>technicianSubServices;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "technician", cascade ={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
+    List<TechnicianSubService> technicianSubServices;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "technician", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @ToString.Exclude
     List<Comment> comments;
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "technician", cascade ={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "technician", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @ToString.Exclude
     List<Offer> offers;
+
     @Builder
     public Technician(String firstName, String lastName, String email, String password, LocalDate registeredDate, Wallet wallet, TechnicianStatus technicianStatus, double rate, byte[] avatar, List<TechnicianSubService> technicianSubServices, List<Comment> comments, List<Offer> offers) {
         super(firstName, lastName, email, password, registeredDate, wallet);

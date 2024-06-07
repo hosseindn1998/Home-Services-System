@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @ToString
 @MappedSuperclass
 public class Person extends BaseEntity<Long> {
-@NotNull(message = "FirstName must not be null")
+    @NotNull(message = "FirstName must not be null")
     @Pattern(regexp = "^[A-Z](?=.{1,29}$)[A-Za-z]*(?:\\h+[A-Z][A-Za-z]*)*$")
     String firstName;
     @NotNull(message = "LastName must not be null")

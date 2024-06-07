@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface OrderService extends BaseService<Order, Long> {
     List<Order> findByCustomerId(Long customerId);
+
     Order findByCustomerIdAndId(Long customerId, Long id);
 
 }

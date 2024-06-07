@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface TechnicianService extends BaseService<Technician, Long> {
     Boolean isExistsByEmail(String email);
+
     Technician authentication(String email, String password);
+
     List<Technician> findAllVerified();
 
 }

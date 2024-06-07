@@ -20,6 +20,7 @@ public class TechnicianServiceImpl extends BaseServiceImpl<Technician, Long, Tec
         super(repository, sessionFactory);
         this.sessionFactory = sessionFactory;
     }
+
     @Override
     public Boolean isExistsByEmail(String email) {
         try (Session session = sessionFactory.getCurrentSession()) {
@@ -32,6 +33,7 @@ public class TechnicianServiceImpl extends BaseServiceImpl<Technician, Long, Tec
             return false;
         }
     }
+
     @Override
     public Technician authentication(String email, String password) {
         Transaction transaction = null;
@@ -54,7 +56,7 @@ public class TechnicianServiceImpl extends BaseServiceImpl<Technician, Long, Tec
         try (Session session = sessionFactory.getCurrentSession()) {
             transaction = session.beginTransaction();
             List<Technician> technicians = repository.findAllVerified();
-            if(technicians.isEmpty())
+            if (technicians.isEmpty())
                 throw new NotFoundException("No items found ");
             session.getTransaction().commit();
             return technicians;

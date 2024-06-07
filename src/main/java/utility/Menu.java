@@ -338,6 +338,7 @@ public class Menu {
             Customer customer = customerService.findById(loggedInUser);
             customer.setPassword(newPassword);
             customerService.saveOrUpdate(customer);
+            System.out.println("Password changed Successfully");
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }

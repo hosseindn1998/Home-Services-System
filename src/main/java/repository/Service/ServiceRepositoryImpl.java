@@ -4,7 +4,7 @@ import base.repository.BaseRepositoryImpl;
 import model.Service;
 import org.hibernate.SessionFactory;
 
-public class ServiceRepositoryImpl extends BaseRepositoryImpl<Service,Long> implements ServiceRepository {
+public class ServiceRepositoryImpl extends BaseRepositoryImpl<Service, Long> implements ServiceRepository {
     public ServiceRepositoryImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

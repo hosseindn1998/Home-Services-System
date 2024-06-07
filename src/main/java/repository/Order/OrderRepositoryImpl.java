@@ -22,6 +22,7 @@ public class OrderRepositoryImpl extends BaseRepositoryImpl<Order, Long> impleme
         query.setParameter("customerId", customerId);
         return query.getResultList();
     }
+
     @Override
     public Optional<Order> findByCustomerIdAndId(Long customerId, Long id) {
         Session session = SessionFactorySingleton.getInstance().getCurrentSession();

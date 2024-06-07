@@ -27,10 +27,10 @@ public class SubService extends BaseEntity<Long> {
     String description;
     @ManyToOne
     Service service;
-    @OneToMany(mappedBy = "subService",cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "subService", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     @ToString.Exclude
-    List<TechnicianSubService>technicianSubServices;
+    List<TechnicianSubService> technicianSubServices;
     @ToString.Exclude
-    @OneToMany(mappedBy = "subservice",cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REMOVE})
-    List<Order>orders;
+    @OneToMany(mappedBy = "subservice", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    List<Order> orders;
 }

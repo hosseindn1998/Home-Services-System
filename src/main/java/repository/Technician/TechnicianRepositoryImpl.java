@@ -13,6 +13,7 @@ public class TechnicianRepositoryImpl extends BaseRepositoryImpl<Technician, Lon
     public TechnicianRepositoryImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
+
     @Override
     public Boolean isExistsByEmail(String email) {
         Session session = SessionFactorySingleton.getInstance().getCurrentSession();
@@ -20,6 +21,7 @@ public class TechnicianRepositoryImpl extends BaseRepositoryImpl<Technician, Lon
         query.setParameter("email", email);
         return !query.getResultList().isEmpty();
     }
+
     @Override
     public Technician authentication(String email, String password) {
         Session session = SessionFactorySingleton.getInstance().getCurrentSession();

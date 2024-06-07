@@ -14,12 +14,12 @@ public class AdminServiceImpl extends BaseServiceImpl<Admin, Long, AdminReposito
 
     @Override
     public Admin authentication(String email, String password) {
-        Transaction transaction=null;
-        try(Session session=sessionFactory.getCurrentSession()) {
-            transaction=session.beginTransaction();
+        Transaction transaction = null;
+        try (Session session = sessionFactory.getCurrentSession()) {
+            transaction = session.beginTransaction();
             Admin admin = repository.authentication(email, password);
             transaction.commit();
-            return admin ;
+            return admin;
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
