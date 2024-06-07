@@ -72,5 +72,31 @@ public class Menu {
         System.out.println("Please Enter Choosing Password :");
         return getString();
     }
+    public void publicMenu() {
+        boolean exit = false;
+        do {
+            System.out.println("Welcome To Your Site!");
+            System.out.println("1-SignIn As Customer");
+            System.out.println("2-SignUp As Customer");
+            System.out.println("3-SignIn As Technician");
+            System.out.println("4-SignUp As Technician");
+            System.out.println("5-Sign In As Admin");
+            System.out.println("0-Exit");
+
+            int number = getIntFromUser();
+
+
+            switch (number) {
+                case 1 -> loginAsCustomer();
+                case 2 -> signUpCustomer();
+                case 3 -> loginAsTechnician();
+                case 4 -> signUpTechnician();
+                case 5 -> loginAsAdmin();
+                case 0 -> exit = true;
+                default -> System.out.println("Integer must be between 1-5");
+            }
+
+        } while (!exit);
+    }
 
 }
