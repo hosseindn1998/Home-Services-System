@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -21,6 +22,17 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity<ID>, ID extends Se
             entity = session.merge(entity);
         return entity;
     }
+    @Override
+    public Optional<T> findById(ID id) {
+        Session session = sessionFactory.getCurrentSession();
+        return Optional.ofNullable(session.get(getEntityClass(), id));
+    }
+
+
+
+    public abstract Class<T> getEntityClass();
+
+    public abstract String getEntity();
 
 
 
