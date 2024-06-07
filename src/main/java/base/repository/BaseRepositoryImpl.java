@@ -4,8 +4,10 @@ import base.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -34,7 +36,12 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity<ID>, ID extends Se
         session.remove(entity);
     }
 
-
+    @Override
+    public List<T> findAll() {
+        Session session = sessionFactory.getCurrentSession();
+        Query<T> query = session.createQuery(String.format("from %s", getEntity()), getEntityClass());
+        return query.getResultList();
+    }
 
     public abstract Class<T> getEntityClass();
 
