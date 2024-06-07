@@ -9,6 +9,7 @@ import service.Technician.TechnicianServiceImpl;
 import service.Wallet.WalletServiceImpl;
 import service.technician_subservice.TechnicianSubServiceServiceImpl;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -22,4 +23,18 @@ public class Menu {
     private final WalletServiceImpl walletService = ApplicationContext.getWalletService();
     private final TechnicianSubServiceServiceImpl technicianSubServiceService = ApplicationContext.getTechnicianSubServiceService();
     private Long loggedInUser;
+    public Integer getIntFromUser() {
+        int input;
+        while (true) {
+            try {
+                input = scanner.nextInt();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Input must be Only Integer,Try again!");
+            }
+            scanner.nextLine();
+        }
+        scanner.nextLine();
+        return input;
+    }
 }
