@@ -429,6 +429,33 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void addTechnicianToSubService() {
+        seeTechnicians();
+        System.out.println("Please Enter Technician id :");
+        Long technicianId = getLongFromUser();
+        seeTechnicianSubServices(technicianId);
+        seeSubServices();
+        System.out.println("Please Enter SubService id :");
+        Long subServiceId = getLongFromUser();
+        try {
+            TechnicianSubService technicianSubService = TechnicianSubService.builder()
+                    .subService(subServiceService.findById(subServiceId))
+                    .technician(technicianService.findById(technicianId))
+                    .build();
+            if (!technicianService.findAllVerified().stream().map(Technician::getId).toList().contains(technicianId)) {
+                throw new NotFoundException("this technician not verified");
+            }
+            if (technicianSubServiceService.isExist(technicianId, subServiceId)) {
+                throw new DuplicateValueException("This technician already is exist in this SubService");
+            }
+            technicianSubServiceService.saveOrUpdate(technicianSubService);
+            System.out.printf("SubService with id=%s added to Technician with id=%s successfully%n"
+                    , subServiceId, technicianId);
+
+        } catch (NotFoundException | DuplicateValueException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 }
