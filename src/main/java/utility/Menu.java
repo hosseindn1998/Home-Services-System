@@ -456,6 +456,22 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void deleteTechnicianFromSubService() {
+        seeTechnicians();
+        System.out.println("Please Enter Technician id :");
+        Long technicianId = getLongFromUser();
+        seeTechnicianSubServices(technicianId);
+        System.out.println("Please Enter SubService id :");
+        Long subServiceId = getLongFromUser();
+        try {
+            TechnicianSubService technicianSubService = technicianSubServiceService.find(technicianId, subServiceId);
+            if (technicianSubService == null)
+                throw new NotFoundException("this Relation Not found");
+            technicianSubServiceService.delete(technicianSubService);
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 
 }
