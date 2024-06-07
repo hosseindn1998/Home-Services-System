@@ -20,6 +20,14 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Customer, Long> i
         return !query.getResultList().isEmpty();
     }
 
+    @Override
+    public Customer authentication(String email, String password) {
+        Session session = SessionFactorySingleton.getInstance().getCurrentSession();
+        Query<Customer> query = session.createQuery("FROM Customer c WHERE c.email= :email AND c.password = :password", getEntityClass());
+        query.setParameter("email", email);
+        query.setParameter("password", password);
+        return query.getSingleResultOrNull();
+    }
 
 
     @Override
