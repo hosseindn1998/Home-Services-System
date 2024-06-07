@@ -245,5 +245,16 @@ public class Menu {
             System.out.println(e.getMessage());
         }
     }
+    public void deleteTechnician() {
+        try {
+            seeTechnicians();
+            System.out.println("Please Inter TechnicianId You Want To Delete :");
+            Long technicianId = getLongFromUser();
+            technicianService.delete(technicianService.findById(technicianId));
+            System.out.println("Technician Deleted Successfully");
+        } catch (NotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
